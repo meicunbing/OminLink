@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'OminLink'
-include('app', 'list', 'utilities')
+include('app')
