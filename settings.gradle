@@ -10,4 +10,4 @@
 rootProject.name = 'OminLink'
 include 'app'
 include 'domain'
-
+include 'app-front'
