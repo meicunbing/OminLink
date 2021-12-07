@@ -1,22 +1,14 @@
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'net.eikehirsch.react:gradle-react-plugin:0.4.1'
-    }
-}
 plugins {
-    id 'net.eikehirsch.react' version '0.4.1'
+    id "com.github.node-gradle.node" version "3.1.1"
 }
-
-apply plugin: 'net.eikehirsch.react'
-jsx {
-    sourcesDir = 'src/react'
-    destDir    = 'out'
-    // optional
-    options {
-        extension = 'jsx' // js is the default extension
-    }
+yarn_cache_clean {
+    args = ['--no-emoji', '--json']
+}
+yarn_install.dependsOn(yarn_cache_clean)
+task addExpress(type: YarnTask) {
+    // add the express package only
+    args = ['add', 'express', '--dev']
+}
+yarn_start {
+    args = ['start']
 }
