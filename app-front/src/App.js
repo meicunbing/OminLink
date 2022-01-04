@@ -9,26 +9,22 @@ import Dashboard from "./admin/Dashboard";
 import authProvider from "./admin/authProvider";
 import dataProvider from "./admin/dataProvider";
 import NotFound from "./error/NotFound";
-import englishMessages from "ra-language-english";
-import chineseMessages from "ra-language-chinese"
-import frenchMessages from "ra-language-french"
 import themeReducer from "./admin/themeReducer";
 import Layout from "./layout/OminLinkLayout";
+import Login from "./layout/OminLinkLogin";
+import OminLinkChineseMessages from "./i18n/zh";
+import OminLinkEnglishMessages from "./i18n/en";
 
 // https://marmelab.com/react-admin/Admin.html
 const i18nProvider = polyglotI18nProvider(locale => {
-    if (locale === 'fr') {
-        return frenchMessages
-    }else if(locale === 'zh'){
-        return chineseMessages
+    if(locale === 'zh'){
+        return OminLinkChineseMessages
     }
-
-    // Always fallback on english
-    return englishMessages;
+    return OminLinkEnglishMessages;
 }, 'zh');
 const App = () => (
     <Admin title="OminLink 全链通，打通服务型企业销售、服务、客户关系环节" dashboard={Dashboard} authProvider={authProvider}
-           dataProvider={dataProvider} customReducers={{ theme: themeReducer }}
+           dataProvider={dataProvider} customReducers={{ theme: themeReducer }} loginPage={Login}
            layout={Layout} catchAll={NotFound} i18nProvider={i18nProvider} disableTelemetry>
         <Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate} icon={PostIcon}/>
         <Resource name="users" list={UserList} icon={UserIcon}/>

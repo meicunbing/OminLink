@@ -78,15 +78,15 @@ interface FormValues {
     password?: string;
 }
 
-const { Form } = withTypes<FormValues>();
+const { Form } = withTypes();
 
-const Login = () => {
+const OminLinkLogin = () => {
     const [loading, setLoading] = useState(false);
     const translate = useTranslate();
     const classes = useStyles();
     const notify = useNotify();
     const login = useLogin();
-    const location = useLocation<{ nextPathname: string } | null>();
+    const location = useLocation();
 
     const handleSubmit = (auth: FormValues) => {
         setLoading(true);
@@ -140,7 +140,7 @@ const Login = () => {
                                 </Avatar>
                             </div>
                             <div className={classes.hint}>
-                                Hint: demo / demo
+                                {translate("custom.auth.hit")}: demo / demo
                             </div>
                             <div className={classes.form}>
                                 <div className={classes.input}>
@@ -190,17 +190,17 @@ const Login = () => {
     );
 };
 
-Login.propTypes = {
+OminLinkLogin.propTypes = {
     authProvider: PropTypes.func,
     previousRoute: PropTypes.string,
 };
 
 // We need to put the ThemeProvider decoration in another component
-// Because otherwise the useStyles() hook used in Login won't get
+// Because otherwise the useStyles() hook used in OminLinkLogin won't get
 // the right theme
 const LoginWithTheme = (props: any) => (
     <ThemeProvider theme={createTheme(lightTheme)}>
-        <Login {...props} />
+        <OminLinkLogin {...props} />
     </ThemeProvider>
 );
 
