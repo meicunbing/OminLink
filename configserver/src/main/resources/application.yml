@@ -1,0 +1,44 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: configserver
+  security:
+    user:
+      name: admin
+      password: admin
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://${HOME}/.configserver
+          #basedir: base
+          default-label: master
+
+logging:
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.cloud: 'DEBUG'
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /admin/info
+    healthCheckUrlPath: /admin/health
+  client:
+    serviceUrl:
+      defaultZone: http://admin:admin@localhost:8761/eureka/
+    healthcheck:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      base-path: "/admin"
+      exposure:
+        include: "*"
+  endpoint:
+    env:
+      post:
+        enabled: true
